@@ -1,0 +1,27 @@
+.rcsearch{
+    margin-top: 120px;
+}
+
+@media screen and (max-width:1500px) {
+    .rcsearch{
+        margin-top: 220px;
+    }
+}
+@media screen and (max-width:1280px) {
+    .rcsearch{
+        margin-top: 320px;
+    }
+}
+@media screen and (max-width:770px) {
+    .rcsearch{
+        margin-top: 410px;
+    }
+}
+@media screen and (max-width:605px) {
+    .rcsearch{
+        margin-top: 520px;
+    }
+    .rcsearch>h1{
+        font-size: 28px;
+    }
+}

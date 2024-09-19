@@ -1,0 +1,44 @@
+
+.inputwrapper{
+    position: relative;
+    border: 2px solid rgb(159, 154, 154);
+    border-radius: 4px;
+    margin-top: 20px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.lged{
+    color: black;
+    margin-left: 16px;
+    font-size: 14px;
+}
+.arrows{
+    position: absolute;
+    font-weight: bolder;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-70%);
+}
+.active{
+    position: relative;
+}
+.active::before{
+    transition: .2s linear;
+    content:"";
+    width:100%;
+    height: 5px;
+    background: #8DD3BB;
+    position:absolute;
+    box-sizing: border-box;
+    left: 0;
+    bottom: 0px;
+    animation: .2s grow linear forwards;
+}
+@keyframes grow {
+    from{
+        width: 0%;
+    }
+    to{
+        width: 100%;
+    }
+}
