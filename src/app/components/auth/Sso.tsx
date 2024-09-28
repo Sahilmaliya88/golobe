@@ -6,12 +6,17 @@ import google from '../../../../public/google.png'
 import apple from '../../../../public/apple.png'
 import Image from 'next/image';
 import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 interface Props {}
 const Sso: NextPage<Props> = ({}) => {
+  const router:AppRouterInstance = useRouter()
   const {status} = useSession()
-  console.log(status)
+  if(status==="authenticated"){
+    router.push('/')
+  }
   return <div className='w-full flex items-center gap-3 justify-between'>
-    <SsoBtn>
+    <SsoBtn onClick={()=>signIn("facebook")}>
         <Image src={fb} height={24} width={24} alt="Facebook" />
     </SsoBtn>
     <SsoBtn onClick={()=>signIn('google')}>

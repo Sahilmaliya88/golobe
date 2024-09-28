@@ -18,19 +18,22 @@ import { Montserrat } from 'next/font/google';
 const mont:NextFont = Montserrat({subsets:['cyrillic']})
 import toast from 'react-hot-toast';
 import { RootState } from '@/lib/store';
+import HeaderContextMenu from './Header.contextMenu';
 interface Props {
     radius:number,
     bg?:string
 }
 const Header: NextPage<Props> = ({radius,bg}) => {
+    const url:string = process.env.NEXT_PUBLIC_APIURL as string
     const [active,setactive] = useState<boolean>(false)
+    const [showMenu,setshowMenu] = useState<boolean>(false)
     const isLoggedIn:boolean = useSelector((state:RootState)=>state.auth.isLoggedIn)
     const user : user | null = useSelector((state:RootState)=>state.auth.user)
     const dispatch = useDispatch()
     const {mutate} = useMutation({
         mutationFn:async()=>{
             try{
-                const data = await axios.get('http://localhost:3000/api/user/verify',{withCredentials:true})
+                const data = await axios.get(`${url}/api/user/verify`,{withCredentials:true})
                 if(data){
                     return data
                    
@@ -44,25 +47,25 @@ const Header: NextPage<Props> = ({radius,bg}) => {
             toast.success(`hello ${data?.data.user.firstname}`)
             dispatch(addUser({user:data?.data.user}))
         },
-        onError(data){
-            toast.error(data.message)
+        onError(){
+
         }
     })
     useEffect(()=>{
         mutate()
     },[])
    
-  return <header className={`flex w-full h-[80px] px-4 py-5 rounded-${radius} justify-between`}>
+  return <header className={`flex w-full relative h-[80px] px-4 py-5 rounded-${radius} justify-between`}>
         <div className='flex gap-2 h-full max-mobile:hidden'>
             <Link href={"/"} className={`h-full  flex text-sm text-white items-center gap-1`}><FaPlane size={16} color='white'></FaPlane><p>Find Flight</p></Link>
             <Link href={"/"} className='flex text-sm text-white h-full items-center gap-1'><IoBed size={16} color='white'></IoBed><p>Find Stays</p></Link>
         </div>
         <Logo varient={"white"} Width={500} Height={500} ></Logo>
         {
-            isLoggedIn ? (<div className='flex gap-2 items-center'>
+            isLoggedIn ? (<button className='flex gap-2 pr-4 items-center' onClick={()=>setshowMenu(prev=>!prev)}>
                 <Image src={user?.photo || ''} alt='no user' width={45} height={45} className='rounded-full'></Image>
                 <p className={`${mont.className} text-md font-bold ${bg==="white"? "text-black":"text-white"}`}>{`${user?.firstname} ${user?.lastname.charAt(0).toUpperCase()}.`}</p>
-            </div>):(<div className='flex gap-2 max-mobile:hidden items-center'>
+            </button>):(<div className='flex gap-2 max-mobile:hidden items-center'>
                 <Link href={'/login'}>
                 <Button variant={"ghost"} size={"lg"} className='text-white'>Login</Button> </Link>
                 <Link href={'/signup'}>
@@ -75,6 +78,7 @@ const Header: NextPage<Props> = ({radius,bg}) => {
         <span></span>
         <span></span>
       </div>
+     {showMenu && <HeaderContextMenu user={user}></HeaderContextMenu>}
   </header>
 }
 

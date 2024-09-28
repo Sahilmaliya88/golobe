@@ -16,6 +16,9 @@ export async function POST(req:NextRequest){
         await connectToDatabase()
         //find user
         const user:typeUser = await UserModel.findOne({email:email}).select("+password")
+        if(user.provider){
+            throw new Error("you are already logged in with another provider")
+        }
         //password compare
         const compare = await bcrypt.compare(password,user.password)
         if(!compare){

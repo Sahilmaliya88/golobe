@@ -26,6 +26,7 @@ import { Montserrat } from 'next/font/google';
 const mont:NextFont = Montserrat({subsets:['cyrillic']})
 interface Props {}
 const Page: NextPage<Props> = async({}) => {
+  const url:string = process.env.NEXT_PUBLIC_APIURL as string
   const {data} = useSession()
   console.log(data)
   //router
@@ -33,7 +34,6 @@ const Page: NextPage<Props> = async({}) => {
   //dispatcher
   const dispatch = useDispatch()
   const remember = useRef<boolean>(false)
-  console.log(remember)
   //react-hook-form
   const {control,handleSubmit,formState:{errors}} = useForm<z.infer<typeof loginSchema>>({
     resolver:zodResolver(loginSchema)
@@ -42,7 +42,7 @@ const Page: NextPage<Props> = async({}) => {
   const {mutate,isPending} = useMutation({
     mutationFn:async(values:z.infer<typeof loginSchema>)=>{
       try{
-          const response = await axios.post('http://localhost:3000/api/user/login',{...values,remember:remember})
+          const response = await axios.post(`${url}/api/user/login`,{...values,remember:remember})
           if(response){
             return response.data
           }
