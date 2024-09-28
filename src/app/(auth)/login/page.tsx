@@ -26,7 +26,6 @@ import { Montserrat } from 'next/font/google';
 const mont:NextFont = Montserrat({subsets:['cyrillic']})
 interface Props {}
 const Page: NextPage<Props> = async({}) => {
-  const url:string = process.env.NEXT_PUBLIC_APIURL as string
   const {data} = useSession()
   console.log(data)
   //router

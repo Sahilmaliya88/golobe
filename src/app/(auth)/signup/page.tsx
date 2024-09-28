@@ -26,7 +26,6 @@ interface Props {}
 
 const SignUp: NextPage<Props> = ({}) => {
   const imgs:string[] = [`${plane.src}`,`${hotels.src}`]
-  const url:string = process.env.NEXT_PUBLIC_APIURL as string
   const dispatch = useDispatch()
   const [accepted,setaccpeted] = useState<boolean>(false)
   //react query

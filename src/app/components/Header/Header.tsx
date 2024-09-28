@@ -24,7 +24,6 @@ interface Props {
     bg?:string
 }
 const Header: NextPage<Props> = ({radius,bg}) => {
-    const url:string = process.env.NEXT_PUBLIC_APIURL as string
     const [active,setactive] = useState<boolean>(false)
     const [showMenu,setshowMenu] = useState<boolean>(false)
     const isLoggedIn:boolean = useSelector((state:RootState)=>state.auth.isLoggedIn)
