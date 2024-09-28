@@ -31,9 +31,9 @@ const Page: NextPage<Props> = ({}) => {
           <Header radius={0}></Header>
         </div>
         <div className={`${mont.className} max-tablet:w-full *:text-center main-text`}>
-            <h1 className='text-[45px] max-mobile:text-[35px] leading-[56px] max-mobile:leading-tight  font-[700]'>Helping Others</h1>
-            <h1 className='text-[80px]  max-mobile:text-[60px] leading-[101px] max-mobile:leading-[80px] font-[700]'>Live & Travel</h1>
-            <p className='text-[20px] font-[600px]'>Special offers to suit your plan</p>
+            <h1 className='text-[45px] z-2 max-mobile:text-[35px] leading-[56px] max-mobile:leading-tight  font-[700]'>Helping Others</h1>
+            <h1 className='text-[80px] z-2 max-mobile:text-[60px] leading-[101px] max-mobile:leading-[80px] font-[700]'>Live & Travel</h1>
+            <p className='text-[20px] z-2 font-[600px]'>Special offers to suit your plan</p>
         </div>
         <div className="Book shadow-sm max-sm:w-full shadow-gray-300">
         <BookingForm  class='none'></BookingForm>
