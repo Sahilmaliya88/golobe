@@ -11,13 +11,12 @@ interface Props {
 }
 
 const LogoutBtn: NextPage<Props> = ({user}) => {
-    const url:string = process.env.NEXT_PUBLIC_APIURL as string
     const dispath = useDispatch()
     function logout():void{
         if(user?.provider){
             signOut()
         }else{
-            axios.get(`${url}/api/user/logout`,{withCredentials:true}) 
+            axios.get(`/api/user/logout`,{withCredentials:true}) 
         }
         dispath(removeUser())
     }

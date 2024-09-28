@@ -33,7 +33,7 @@ const Header: NextPage<Props> = ({radius,bg}) => {
     const {mutate} = useMutation({
         mutationFn:async()=>{
             try{
-                const data = await axios.get(`${url}/api/user/verify`,{withCredentials:true})
+                const data = await axios.get(`/api/user/verify`,{withCredentials:true})
                 if(data){
                     return data
                    

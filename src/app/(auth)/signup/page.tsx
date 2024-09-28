@@ -34,7 +34,7 @@ const SignUp: NextPage<Props> = ({}) => {
   const {mutate,isPending} = useMutation({
     mutationFn:async(values:z.infer<typeof signUpSchema>)=>{
       try{
-        const data= await axios.post(`${url}/api/user/signup`,values)
+        const data= await axios.post(`/api/user/signup`,values)
         return data
       }catch(err){
         throw err

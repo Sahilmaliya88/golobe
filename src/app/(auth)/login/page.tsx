@@ -42,7 +42,7 @@ const Page: NextPage<Props> = async({}) => {
   const {mutate,isPending} = useMutation({
     mutationFn:async(values:z.infer<typeof loginSchema>)=>{
       try{
-          const response = await axios.post(`${url}/api/user/login`,{...values,remember:remember})
+          const response = await axios.post(`/api/user/login`,{...values,remember:remember})
           if(response){
             return response.data
           }
